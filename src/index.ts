@@ -4,7 +4,7 @@ import Koa from 'koa'
 const app = new Koa()
 
 // ミドルウェア設定
-app.use(async (ctx) => ctx.body = "koa app.")
+app.use(async (ctx) => ctx.body = "koa app. + log4js")
 
 // サーバ起動
 const port = process.env.PORT || 3000
