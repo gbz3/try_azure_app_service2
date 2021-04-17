@@ -4,7 +4,12 @@ import Koa from 'koa'
 const app = new Koa()
 
 // ミドルウェア設定
-app.use(async (ctx) => ctx.body = "koa app. + log4js")
+import mwServ from 'koa-static'
+import { mwRequestId } from './middlewares/request-id'
+
+app.use(mwServ(__dirname + '/../static'))
+app.use(mwRequestId)
+app.use(async (ctx) => ctx.body = "koa app. + koa-static")
 
 // サーバ起動
 const port = process.env.PORT || 3000
