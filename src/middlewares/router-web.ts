@@ -5,6 +5,7 @@ import compose from 'koa-compose'
 // see: https://github.com/DefinitelyTyped/DefinitelyTyped/issues/36161#issuecomment-571295417
 const RouterWeb = new Router<Koa.DefaultState, Koa.Context>()
   .get('/', root)
+  .get('/room/dummy', async ctx => await ctx.render('room'))  // TODO dummy
 
 export const mwRouterWeb = compose([RouterWeb.routes(), RouterWeb.allowedMethods()])
 
