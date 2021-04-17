@@ -106,3 +106,9 @@ $ npm i -D sass sass-loader postcss postcss-loader autoprefixer mini-css-extract
 $ echo "static/style.css" >> .gitignore
 $ echo "static/style.css.map" >> .gitignore
 ```
+
+## reCAPTCHA v3 導入
+
+- [Google reCAPTCHA の使い方（v2/v3）](https://www.webdesignleaves.com/pr/plugins/google_recaptcha.php#h3_index_13)
+- [reCAPTCHA v3/クライアント](https://developers.google.com/recaptcha/docs/v3)
+- [reCAPTCHA v3/サーバ](https://developers.google.com/recaptcha/docs/verify)

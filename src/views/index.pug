@@ -16,4 +16,21 @@ html(lang="ja")
     button.btn.btn-light(type='button') Light
     button.btn.btn-dark(type='button') Dark
     button.btn.btn-link(type='button') Link
+    form#request-form.p-2(action=`/` method="POST")
+      .from-group 
+        label(for="username") 姓名
+        input.form-control#username(type="text" name="username")
+      .from-group 
+        label(for="mailaddr") メールアドレス
+        input.form-control#mailaddr(type="email" name="mailaddr")
+      button.btn.btn-primary(type="submit") 利用申込
     script(src="/main.js") 
+    script(src="https://www.google.com/recaptcha/api.js?render=6Le9Pa4aAAAAACimNjUpXvQoUF9zi75c2uS2au18") 
+    script.
+      const form = document.getElementById('request-form')
+      form.onsubmit = ev => {
+        ev.preventDefault()
+        grecaptcha.ready(() => {
+          console.log('grecaptcha is ready.')
+        })
+      }
