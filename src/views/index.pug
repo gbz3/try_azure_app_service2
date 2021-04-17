@@ -30,7 +30,19 @@ html(lang="ja")
       const form = document.getElementById('request-form')
       form.onsubmit = ev => {
         ev.preventDefault()
-        grecaptcha.ready(() => {
+        grecaptcha.ready(async () => {
           console.log('grecaptcha is ready.')
+          const token = await grecaptcha.execute('6Le9Pa4aAAAAACimNjUpXvQoUF9zi75c2uS2au18', { action: 'request' }).catch(err => console.log(`error at execute(). err=${err}`))
+          const iToken = document.createElement('input')
+          iToken.type = 'hidden'
+          iToken.name = 'recaptcha-token'
+          iToken.value = token
+          form.appendChild(iToken)
+          const iAction = document.createElement('input')
+          iAction.type = 'hidden'
+          iAction.name = 'recaptcha-action'
+          iAction.value = 'request'
+          form.appendChild(iAction)
+          form.submit()
         })
       }
