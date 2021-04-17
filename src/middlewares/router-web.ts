@@ -10,5 +10,5 @@ export const mwRouterWeb = compose([RouterWeb.routes(), RouterWeb.allowedMethods
 
 async function root(ctx: Koa.Context) {
   ctx.logger.info(`from @koa/router.`)
-  ctx.body = `koa app. + @koa/router`
+  await ctx.render('index')
 }
