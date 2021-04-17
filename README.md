@@ -77,3 +77,11 @@ $ npm run 3000    # Ctrl-C で停止。http://localhost:3000 でアクセス
 $ npm i -D webpack webpack-cli
 $ echo "static/main.js" >> .gitignore
 ```
+
+## フロントエンドを Typescript 化
+
+- [最新版TypeScript+webpack 5の環境構築まとめ](https://ics.media/entry/16329/)
+
+```bash
+$ npm i -D ts-loader
+```
