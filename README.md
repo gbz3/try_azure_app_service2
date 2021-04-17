@@ -72,9 +72,10 @@ $ npm run 3000    # Ctrl-C で停止。http://localhost:3000 でアクセス
 
 - [最新版で学ぶwebpack 5入門 JavaScriptのモジュールバンドラ](https://ics.media/entry/12140/)
 - [webpack の基本的な使い方](https://www.webdesignleaves.com/pr/jquery/webpack_basic_01.html)
+- [webpackで開発用/本番用の設定を分ける](https://qiita.com/teinen_qiita/items/4e828ac30221efb624e1)
 
 ```bash
-$ npm i -D webpack webpack-cli
+$ npm i -D webpack webpack-cli webpack-merge
 $ echo "static/main.js" >> .gitignore
 ```
 

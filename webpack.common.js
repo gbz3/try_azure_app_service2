@@ -1,7 +1,6 @@
 const path = require('path')
 
 module.exports = {
-  mode: 'development',
   entry: './src-wp/index.ts',
   output: {
     filename: 'main.js',
