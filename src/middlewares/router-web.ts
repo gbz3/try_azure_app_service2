@@ -20,11 +20,12 @@ async function root(ctx: Koa.Context) {
 /** 利用申込 */
 async function request(ctx: Koa.Context) {
   ctx.logger.info(`body=${JSON.stringify(ctx.request.body)}`)
-  await http2Post(ctx.logger, new URL(`https://www.google.com/recaptcha/api/siteverify`), { secret: process.env.RECAPTCHA_SECRET, response: ctx.request.body['recaptcha-token'] })
+  const resVerify = await http2Post(ctx.logger, new URL(`https://www.google.com/recaptcha/api/siteverify`), { secret: process.env.RECAPTCHA_SECRET, response: ctx.request.body['recaptcha-token'] })
+  ctx.logger.info(`resVerify=${resVerify}`)
 }
 
 function http2Post(logger: RequestLogger, url: URL, body: object = {}) {
-  return new Promise<void>((resolve, reject) => {
+  return new Promise<string>((resolve, reject) => {
     const client = http2.connect(url.origin)
     const buffer = Buffer.from(JSON.stringify(body), 'utf8')
     client.on('error', err => { logger.error(err); client.close(); reject(err); })
@@ -43,7 +44,7 @@ function http2Post(logger: RequestLogger, url: URL, body: object = {}) {
     req.end()
     req.on('end', () => {
       client.close()
-      resolve()
+      resolve(data)
     })
   })
 }
