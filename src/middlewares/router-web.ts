@@ -20,6 +20,7 @@ async function root(ctx: Koa.Context) {
 /** 利用申込 */
 async function request(ctx: Koa.Context) {
   ctx.logger.info(`body=${JSON.stringify(ctx.request.body)}`)
+  ctx.logger.info(`env=${JSON.stringify(process.env)}`)
   const resVerify = await http2Post(ctx.logger, new URL(`https://www.google.com/recaptcha/api/siteverify`), { secret: process.env.RECAPTCHA_SECRET, response: ctx.request.body['recaptcha-token'] })
   ctx.logger.info(`resVerify=${resVerify}`)
 }
