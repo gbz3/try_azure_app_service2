@@ -3,6 +3,7 @@ import Koa from 'koa'
 import compose from 'koa-compose'
 import { RequestLogger } from './request-id'
 import http2 from 'http2'
+import querystring from 'querystring'
 
 // see: https://github.com/DefinitelyTyped/DefinitelyTyped/issues/36161#issuecomment-571295417
 const RouterWeb = new Router<Koa.DefaultState, Koa.Context>()
@@ -28,16 +29,18 @@ async function request(ctx: Koa.Context) {
   ctx.logger.info(`resVerify=${resVerify}`)
 }
 
-function http2Post(logger: RequestLogger, url: URL, body: object = {}) {
+function http2Post(logger: RequestLogger, url: URL, body: any = {}) {
   return new Promise<string>((resolve, reject) => {
     const client = http2.connect(url.origin)
-    const buffer = Buffer.from(JSON.stringify(body), 'utf8')
+    //const buffer = Buffer.from(JSON.stringify(body), 'utf8')
+    const buffer = querystring.stringify(body)
     client.on('error', err => { logger.error(err); client.close(); reject(err); })
     const req = client.request({
       [http2.constants.HTTP2_HEADER_SCHEME]: 'https',
       [http2.constants.HTTP2_HEADER_METHOD]: http2.constants.HTTP2_METHOD_POST,
       [http2.constants.HTTP2_HEADER_PATH]: url.pathname,
-      [http2.constants.HTTP2_HEADER_CONTENT_TYPE]: 'application/json',
+      //[http2.constants.HTTP2_HEADER_CONTENT_TYPE]: 'application/json',
+      [http2.constants.HTTP2_HEADER_CONTENT_TYPE]: 'application/x-www-form-urlencoded',
       [http2.constants.HTTP2_HEADER_CONTENT_LENGTH]: buffer.length,
     })
     req.on('error', err => reject(err))
