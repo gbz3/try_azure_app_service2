@@ -2,14 +2,21 @@ import { v4 } from 'uuid'
 import Koa from 'koa'
 import { getLogger } from '../modules/logger'
 
-// Koa.Context に logger プロパティを追加
-declare module 'koa' {
-  interface DefaultContext {
-    logger: {
+export interface RequestLogger {
       // 必要に応じてメソッド追加
       info: (message: any, ...args: any[]) => void,
       error: (message: any, ...args: any[]) => void,
-    }
+}
+
+// Koa.Context に logger プロパティを追加
+declare module 'koa' {
+  interface DefaultContext {
+    // logger: {
+    //   // 必要に応じてメソッド追加
+    //   info: (message: any, ...args: any[]) => void,
+    //   error: (message: any, ...args: any[]) => void,
+    // }
+    logger: RequestLogger
   }
 }
 
